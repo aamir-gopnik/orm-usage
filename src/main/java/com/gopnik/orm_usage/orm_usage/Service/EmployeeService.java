@@ -9,7 +9,9 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
-    List<Employee> GetEmployeesByNameOrEmail();
+    List<Employee> getEmployeesByNameOrEmail(String empName);
 
     List<Employee> findHighSalaryEmployees(String salaryGte);
+
+    List<Employee> findEmployeeByCriteria(String managerName, String havingSalaryGte);
 }

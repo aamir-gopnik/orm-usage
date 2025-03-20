@@ -20,6 +20,10 @@ public class EmployeeController {
 
     private static final String GET_HIGHER_SALARY_EMPLOYEES = "/high-salary";
 
+    private static final String SEARCH_BY_EMP_NAME = "/search";
+
+    private static final String SEARCH_BY_EMP_CRITERIA = "/searchCriteria";
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -46,7 +50,19 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(@RequestHeader String userId) {
         log.info("EmployeeController >> getAllEmployees >> requester >> {}", userId);
         return  employeeService.getAllEmployees();
+    }
 
+    @GetMapping(SEARCH_BY_EMP_NAME)
+    public List<Employee> searchEmployeeByName(@RequestParam String name) {
+        return employeeService.getEmployeesByNameOrEmail(name);
+    }
+
+    @GetMapping(SEARCH_BY_EMP_CRITERIA)
+    public List<Employee> getEmployeesByCriteria(@RequestParam(value = "managerName", required = false) String managerName,
+                                                 @RequestParam(value = "salaryGreaterThan", required = false) String havingSalaryGte,
+                                                 @RequestHeader("userId") String userId) {
+        log.info("EmployeeController >> getEmployeesByCriteria >> requester >> {}", userId);
+        return employeeService.findEmployeeByCriteria(managerName, havingSalaryGte);
     }
 }
 
