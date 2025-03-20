@@ -1,5 +1,18 @@
+server:
+  port: 8888
+
 spring:
   application:
     name: orm-usage
-
-
+  datasource:
+    url: jdbc:h2:file:./data/gopnikDB
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
