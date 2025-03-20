@@ -24,5 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     }
 
+    @Override
+    public List<Employee> findHighSalaryEmployees(String salaryGte) {
+        double updatedSalaryGte = Double.parseDouble(salaryGte);
+        return employeeRepository.findHighSalaryEmployees(updatedSalaryGte);
+    }
+
 
 }
