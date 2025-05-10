@@ -7,6 +7,4 @@ public class ApiConstants {
     public static final String EMPLOYEE_API_PREFIX = "/employeeService";
 
     public static final String MANAGER_API_PREFIX = "v1/managerService";
-
-
 }

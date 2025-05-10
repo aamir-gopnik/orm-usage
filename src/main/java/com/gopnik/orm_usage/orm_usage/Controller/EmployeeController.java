@@ -2,8 +2,11 @@ package com.gopnik.orm_usage.orm_usage.Controller;
 
 import com.gopnik.orm_usage.orm_usage.Repository.DO.Employee;
 import com.gopnik.orm_usage.orm_usage.Service.EmployeeService;
+import com.gopnik.orm_usage.orm_usage.VO.EmployeeDetails;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +26,8 @@ public class EmployeeController {
     private static final String SEARCH_BY_EMP_NAME = "/search";
 
     private static final String SEARCH_BY_EMP_CRITERIA = "/searchCriteria";
+
+    private static final String SAVE_EMPLOYEE = "/saveEmployee";
 
     @Autowired
     private EmployeeService employeeService;
@@ -63,6 +68,13 @@ public class EmployeeController {
                                                  @RequestHeader("userId") String userId) {
         log.info("EmployeeController >> getEmployeesByCriteria >> requester >> {}", userId);
         return employeeService.findEmployeeByCriteria(managerName, havingSalaryGte);
+    }
+
+    @PostMapping(SAVE_EMPLOYEE)
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody EmployeeDetails employee, @RequestHeader(value = "userId") String userId) {
+        log.info("EmployeeController >> saveEmployee >> requester >> {}", userId);
+        Employee e = employeeService.saveEmployee(employee);
+        return ResponseEntity.ok(e);
     }
 }
 
