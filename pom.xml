@@ -13,6 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>orm-usage</name>
 	<description>ORM-usage</description>
+	<distributionManagement>
+		<repository>
+			<id>github</id>  <!-- Must match settings.xml -->
+			<url>https://maven.pkg.github.com/aamir-gopnik/orm-usage</url>
+		</repository>
+	</distributionManagement>
 	<url/>
 	<licenses>
 		<license/>
