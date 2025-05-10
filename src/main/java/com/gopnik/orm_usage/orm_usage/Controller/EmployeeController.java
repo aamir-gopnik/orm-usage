@@ -76,5 +76,10 @@ public class EmployeeController {
         Employee e = employeeService.saveEmployee(employee);
         return ResponseEntity.ok(e);
     }
+
+    @GetMapping("/this")
+    public String getThis() {
+        return "this";
+    }
 }
 
