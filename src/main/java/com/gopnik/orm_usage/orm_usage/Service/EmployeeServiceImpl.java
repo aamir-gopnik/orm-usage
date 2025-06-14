@@ -7,6 +7,7 @@ import com.gopnik.orm_usage.orm_usage.Repository.ManagerRepository;
 import com.gopnik.orm_usage.orm_usage.VO.EmployeeDetails;
 import com.gopnik.orm_usage.orm_usage.VO.ManagerDetails;
 import jakarta.annotation.PreDestroy;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService, BeanNameAware {
     }
 
     @Override
+    @Transactional
     public Employee saveEmployee(EmployeeDetails employee) {
         Employee newEmp = Employee.builder().name(employee.getName())
                 .salary(employee.getSalary())
@@ -93,7 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService, BeanNameAware {
         Optional<Long> managerId = Optional.ofNullable(employee.getManagerDetails().getId());
         if(managerId.isPresent())
         {
-            log.info("EmployeeServiceImpl >> saveEmployee >> saving employee for ManagerId {}", managerId.get());
+            log.info("EmployeeServiceImpl >> saveEmployee >> saving employee for existing ManagerId {}", managerId.get());
             Optional<Manager> existingManager = managerRepository.findById(managerId.get());
             if(existingManager.isPresent())
             {
